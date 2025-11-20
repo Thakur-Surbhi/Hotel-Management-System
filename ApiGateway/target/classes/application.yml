@@ -1,0 +1,135 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: ApiGateway
+#
+#
+  cloud:
+    gateway:
+      server: 
+        webflux: 
+          routes:
+           - id: USERSERVICE
+             uri: lb://USERSERVICE
+             predicates:
+               - Path=/users/**
+
+           - id: HOTELSERVICE
+             uri: lb://HOTELSERVICE
+             predicates:
+               - Path=/hotels/**,/staffs/**
+
+           - id: RATINGSERVICE
+             uri: lb://RATINGSERVICE
+             predicates:
+               - Path=/ratings/**
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          MyWebApp: 
+#            provider: okta
+#            client-id: 0oaxhztnxvMhC2WL6697
+#            client-secret: 5sOLUDHz87ZGM3Oe5oh9db7_a5WnsMlFePWoQcHsTQgGancOg9YRIJ7BVz6yW4xZ
+#            scope:
+#            - openid, profile, email, offline_access
+#            authorization-grant-type: authorization_code
+#            redirect-uri: 
+#      
+#      #resourceserver:
+#       # jwt:
+#        provider:
+#          issuer-uri: https://trial-1015148.okta.com/oauth2/default
+##          audiences:
+##          - api://default 
+#
+#eureka:
+#  instance:
+#    prefer-ip-address: true 
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+
+
+#okta configuration for api gateway
+
+#okta:
+#  oauth2:
+#    issuer: https://dev-77584981.okta.com/oauth2/default
+#    audience: api://default
+#    client-id: 0oa7w65a24Px9Oyms5d7
+#    client-secret: JfsTTqODW21uapbbhKjW42sGzjcNs86GN7WL5dfU
+#    scopes: openid, profile, email, offline_access
+
+
+
+
+
+
+
+
+
+
+#new code
+#server:
+#  port: 8084
+#
+#spring:
+#  application:
+#    name: ApiGateway
+
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: USERSERVICE
+#          uri: lb://USERSERVICE
+#          predicates:
+#            - Path=/users/**
+#        - id: HOTELSERVICE
+#          uri: lb://HOTELSERVICE
+#          predicates:
+#            - Path=/hotels/**,/staffs/**
+#        - id: RATINGSERVICE
+#          uri: lb://RATINGSERVICE
+#          predicates:
+#            - Path=/ratings/**
+
+# Uncomment it later - surbhi
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          MyWebApp:
+#            provider: okta
+#            client-id: 0oaxhztnxvMhC2WL6697
+#            client-secret: 5sOLUDHz87ZGM3Oe5oh9db7_a5WnsMlFePWoQcHsTQgGancOg9YRIJ7BVz6yW4xZ
+#            scope:
+#              - openid
+#              - profile
+#              - email
+#              - offline_access
+#            authorization-grant-type: authorization_code
+#            redirect-uri: "http://localhost:8084/login/oauth2/code/okta"
+#
+#        provider:
+#          okta:
+#            issuer-uri: https://trial-1015148.okta.com/oauth2/default
+#
+#      resourceserver:
+#        jwt:
+#          issuer-uri: https://trial-1015148.okta.com/oauth2/default
+#          audiences:
+#            - api://default
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
